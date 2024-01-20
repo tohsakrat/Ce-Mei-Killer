@@ -42,6 +42,7 @@
 ![image](https://github.com/tohsakrat/Ce-Mei-Killer/assets/45536831/3c927728-74f8-4bad-b1c1-d4de20108609)
 
 在你鼠标按下的同时，右边会多出来几行
+
 ![image](https://github.com/tohsakrat/Ce-Mei-Killer/assets/45536831/1ce5a714-88c3-4b13-bc89-b0aa11c576d4)
 
 
