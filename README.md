@@ -47,12 +47,12 @@
 
 ![image](https://github.com/tohsakrat/Ce-Mei-Killer/assets/45536831/76a32326-ab36-43b4-b4bb-794925350cfb)
 
-10. 进入项目文件[Ce-Mei-Killer.js](https://github.com/tohsakrat/Ce-Mei-Killer/blob/main/Ce-Mei-Killer.js)，复制全部代码，粘贴到控制台中，回车。
-   单独输入这段，并且把目标uid替换成你要拉黑的厕所的uid。
+10. 进入项目文件[Ce-Mei-Killer.js](https://github.com/tohsakrat/Ce-Mei-Killer/blob/main/Ce-Mei-Killer.js)，复制全部代码，粘贴到控制台中，直接**回车**。
+11. 然后单独输入这行，并且把目标uid替换成你要拉黑的厕所的uid。
     ```javascript
     mainBlockAll(2303645815)// 把2303645815替换为目标用户ID，一键拉黑
     ```
-   回车。
+   **回车**
    
 >  tips
 >  遇到了奇奇怪怪的问题，有用户表示找不到光标没法粘贴，注意看光标在">"符号右边那条狭窄细长的区域，用鼠标多点几下，没有光标出来就是没点对地方
@@ -81,25 +81,25 @@
 
 ![image](https://github.com/tohsakrat/Ce-Mei-Killer/assets/45536831/a070060c-2958-4fef-b1dd-c35ec2716b5f)
 
-11. 喝杯茶，静待拉黑完成，如果遇到请求太频繁被大眼制裁（下图）不要慌张
+12. 喝杯茶，静待拉黑完成，如果遇到请求太频繁被大眼制裁（下图）不要慌张
 
  ![image](https://github.com/tohsakrat/Ce-Mei-Killer/assets/45536831/74b2af1f-fd25-4814-a330-a9a980832d7b)
 
-12. 滚动控制台，回到一开始的提示，复制完整的dogs数组，粘贴到本地的记事本
+13. 滚动控制台，回到一开始的提示，复制完整的dogs数组，粘贴到本地的记事本
 
 ![image](https://github.com/tohsakrat/Ce-Mei-Killer/assets/45536831/81a6eeb2-2437-4841-8ab5-07fb9e2ae6e4)
 
-13. 刷新页面后，在控制台输入
+14. 刷新页面后，在控制台输入
 ```javascript
 window.allDogs=[...]
 //[...]为你刷新前复制的厕所粉丝数组，替换一下
 ```
 
-再次在[Ce-Mei-Killer.js](https://github.com/tohsakrat/Ce-Mei-Killer/blob/main/Ce-Mei-Killer.js)，复制全部代码，粘贴到控制台中回车
+再次在[Ce-Mei-Killer.js](https://github.com/tohsakrat/Ce-Mei-Killer/blob/main/Ce-Mei-Killer.js)，复制全部代码，粘贴到控制台中**回车**
 
-然后单独输入下面这段，把12345换成刚刚最后一次报错前正在处理的uid。
+然后单独输入下面这段，把12345换成刚刚最后一次报错前正在处理的uid，**回车**。
 ```javascript
- //mainResume(12345)//从上一次失败处开始拉黑，把12345换成刚刚最后一次报错前正在处理的uid。用于请求太频繁被大眼制裁的情况 
+ mainResume(12345)//从上一次失败处开始拉黑，把12345换成刚刚最后一次报错前正在处理的uid。用于请求太频繁被大眼制裁的情况 
 ```
 
 ### 贡献和支持
