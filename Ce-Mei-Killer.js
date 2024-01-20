@@ -1,121 +1,152 @@
-async function getTotalPages(uid, pageSize) {
-  const url = `https://weibo.com/ajax/user/popcard/get?id=${uid}`;
+// 通用的网络请求函数
+async function makeRequest(url, method = 'GET', body = null, headers = {}) {
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method,
+      headers,
+      body
+    });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    const data = await response.json();
-    console.log(data);
-    const followersCount = parseInt(data.data.followers_count_str, 10);
-    return Math.ceil(followersCount / pageSize); // 返回需要请求的总页数
+    return await response.json();
   } catch (error) {
-    console.error('Error fetching followers count:', error);
-    return 0; // 发生错误时返回0temp1.data.followers_count_str
+    console.error('Request failed:', error);
   }
 }
 
+// 获取总页数
+async function getTotalPages(uid, pageSize) {
+  const url = `https://weibo.com/ajax/user/popcard/get?id=${uid}`;
+  const data = await makeRequest(url);
+  if (data) {
+    console.log(data);
+    const followersCount = parseInt(data.data.followers_count_str, 10);
+    return Math.ceil(followersCount / pageSize);
+  }
+  return 0;
+}
+
+// 获取某一页的粉丝
 async function fetchPage(uid, page) {
   const url = `https://weibo.com/ajax/friendships/friends?relate=fans&page=${page}&uid=${uid}&type=fans&newFollowerCount=0`;
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    if (data.users && data.users.length > 0) {
-      console.log(`Fetched page ${page}.`);
-      return data.users;
-    } else {
-      console.log(`Page ${page} is empty, possibly blocked dogs.`);
-      return [];
-    }
-  } catch (error) {
-    console.error('Fetch error on page ' + page + ':', error);
+  const data = await makeRequest(url);
+  if (data && data.users && data.users.length > 0) {
+    console.log(`Fetched page ${page}.`);
+    return data.users;
+  } else {
+    console.log(`Page ${page} is empty, possibly blocked dogs.`);
     return [];
   }
 }
 
-async function fetchAllDogs(uid) {
-  const pageSize = 20; // 每页20个用户
- window.allDogs = []; // 用于保存所有恶意用户信息
-
-  // 首先获取总页数
+// 获取所有粉丝的封装函数
+async function fetchAllFans(uid) {
+  const pageSize = 20;
   const totalPages = await getTotalPages(uid, pageSize);
-
-console.log('------- kill '+ totalPages+' pages of dogs -------')
+  console.log(`------- Fetching ${totalPages} pages of dogs -------`);
   if (totalPages === 0) {
     console.log('No pages to fetch or error occurred.');
-    return;
+    return [];
   }
 
-  // 创建一个promise数组来存储所有的fetch请求
-  const fetchPromises = [];
-
+  let allFans = [];
   for (let page = 1; page <= totalPages; page++) {
-    fetchPromises.push(new Promise(resolve => {
-      setTimeout(async () => {
-        const dogs = await fetchPage(uid, page);
-        resolve(dogs);
-      }, (page - 1) * 1000); // 每2秒发起一个新的请求
-    }));
+    const fans = await fetchPage(uid, page);
+    allFans = allFans.concat(fans);
   }
-
-  // 使用Promise.all来等待所有的请求完成
-  const dogsPages = await Promise.all(fetchPromises);
-  window.allDogs= dogsPages.flat(); // 将所有页的dogs合并到一个数组中
-
-  console.log('All dogs fetched. Total dogs:', allDogs.length);
-  console.log(allDogs);
+  allFans = allFans.map(e=>e.id)
+  console.log('All fans fetched. Total dogs:', allFans.length);
+  console.log(allFans)
+  return allFans;
 }
 
-fetchAllDogs(2303645815);
-
-
-
-function blockDogs(dogs) {
-  var http = new XMLHttpRequest();
-  var i = 0;
-  var timer = setInterval(function kill() {
-    if (i >= dogs.length) {
-      return clearInterval(timer);
-    }
-    var dogId = dogs[i];
-    var url = 'https://weibo.com/aj/filter/block?ajwvr=6';
-    http.open('POST', url, true);
-    http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    http.send('uid='+dogId+'&filter_type=1&status=1&interact=1&follow=1');
-    http.onreadystatechange = function() {
-      if (http.readyState != 4 || http.status != 200) {
-        return;
-      }
-      var data = {
-        msg: '解析失败'
-      };
-      try {
-        data = JSON.parse(http.responseText);
-      } catch (err) {}
-      if (data.code == 100000) {
-        console.log(i + '[' + dogId + '] => 成功:' + data.msg + ' - ' + http.status + ' - ' + http.responseText);
-      } else {
-        console.error(i + '[' + dogId + '] => 失败:' + data.msg + ' - ' + http.status + ' - ' + http.responseText);
-      }
-    };
-    i++;
-  }, 1000);
+// 拉黑某个用户
+async function blockDog(userId) {
+	
+	console.log("开始拉黑")
+	console.log(userId)
+  var url = 'https://weibo.com/aj/filter/block?ajwvr=6';
+  var body = `uid=${userId}&filter_type=1&status=1&interact=1&follow=1`;
+  var headers = {
+    'Content-type': 'application/x-www-form-urlencoded'
+  };
+  const data = await makeRequest(url, 'POST', body, headers);
+  if (data && data.code == 100000) {
+    console.log(`[${userId}] => Block success: ${data.msg}`);
+  } else {
+    console.error(`[${userId}] => Block failed: ${data.msg}`);
+  }
 }
 
-// 主函数来获取所有恶意用户并拉黑
-async function main(uid) {
+// 拉黑所有粉丝
+async function blockAllDogs(uid) {
+  window.allDogs = await fetchAllFans(uid);
+   mainBlockList(window.allDogs); 
+}
+
+// 主函数 - 一键拉黑版本
+async function mainBlockAll(uid) {
   try {
-    await fetchAllDogs(uid).then((dogs) => {
-      // 确保所有恶意用户都被获取后再调用blockDogs
-      blockDogs(window.allDogs.map(e=>e.id)); // 开始拉黑操作
-    });
+    await blockAllDogs(uid);
+  } catch (error) {
+    console.error('An error occurred in mainBlockAll:', error);
+  }
+}
+
+// 主函数 - 只获取厕所账号粉丝版本
+async function mainFetchFans(uid) {
+  try {
+    await fetchAllFans(uid);
+  } catch (error) {
+    console.error('An error occurred in mainFetchFans:', error);
+  }
+}
+
+// 暴力法延迟
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// 主函数 - 只拉黑一个uid数组版本
+async function mainBlockList(uids) {
+  if (typeof window.allDogs == 'undefined') window.allDogs = uids;
+  try {
+    for (let index = 0; index < uids.length; index++) {
+      const userId = uids[index];
+      console.log(`Blocking dog ${userId} at index ${index} total ${uids.length}`); // 输出当前userId和下标
+      await blockDog(userId); // 执行拉黑操作
+      await delay(200); // 等待0.2秒
+    }
+	
+  } catch (error) {
+    console.error('An error occurred in mainBlockList:', error);
+  }
+}
+
+// 主函数 - 从上一次失败处重新kill
+async function mainResume(uid) {
+  try {
+    const dogs = window.allDogs || [];
+    const index = dogs.indexOf(uid);
+    if (index === -1) {
+      console.log('UID not found in allDogs.');
+      return;
+    }
+    const dogsToBlock = dogs.slice(index); // 从指定的UID开始到数组末尾的所有dogs
+	console.log("继续拉黑")
+	console.log(dogsToBlock)
+    mainBlockList(dogsToBlock); // 开始拉黑操作
   } catch (error) {
     console.error('An error occurred:', error);
   }
 }
 
-// 使用此函数开始整个流程，替换下面的UID为目标用户ID
-main(2303645815);
+
+
+// 根据需要调用不同的主函数
+//mainBlockAll(2303645815); // 替换为目标用户ID，一键拉黑
+// mainFetchFans(2303645815);//只获取厕所粉丝
+// mainFetchFans(2303645815); // 替换为目标用户ID，只获取厕所账号粉丝
+// mainBlockList([12345, 67890]); // 替换为需要拉黑的用户ID数组，只拉黑指定用户
+ //mainResume(12345)//从上一次失败处开始拉黑，用于请求太频繁被大眼制裁的情况 
