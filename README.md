@@ -31,6 +31,12 @@
 
 ![image](https://github.com/tohsakrat/Ce-Mei-Killer/assets/45536831/faadea4f-d5ff-4cc9-885e-aa8b17fe887e)
 
+
+>  tips
+>  有些电脑f12是系统自带功能键，需要按住键盘左下角的“fn”键，再按“F12”
+>  如果是macbook，则需要同时按下“Command”键和“F12”
+
+
 7. 点击“解除屏蔽”先放厕所出来透透气。别担心，待会关回去。解除屏蔽同时观察右侧网络面板。
 
 ![image](https://github.com/tohsakrat/Ce-Mei-Killer/assets/45536831/3c927728-74f8-4bad-b1c1-d4de20108609)
@@ -48,11 +54,11 @@
 ![image](https://github.com/tohsakrat/Ce-Mei-Killer/assets/45536831/76a32326-ab36-43b4-b4bb-794925350cfb)
 
 10. 进入项目文件[Ce-Mei-Killer.js](https://github.com/tohsakrat/Ce-Mei-Killer/blob/main/Ce-Mei-Killer.js)，复制全部代码，粘贴到控制台中，直接**回车**。
-11. 然后单独输入下面这行，并且把目标uid替换成你要拉黑的厕所的uid。
+11. 然后单独输入下面这行，并且把目标uid替换成你要拉黑的厕所的uid。  **回车执行**
     ```javascript
     mainBlockAll(2303645815)// 把2303645815替换为目标用户ID，一键拉黑
     ```
-   **回车**
+ 
    
 >  tips
 >  遇到了奇奇怪怪的问题，有用户表示找不到光标没法粘贴，注意看光标在">"符号右边那条狭窄细长的区域，用鼠标多点几下，没有光标出来就是没点对地方
