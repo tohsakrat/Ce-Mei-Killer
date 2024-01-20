@@ -47,12 +47,22 @@
 
 ![image](https://github.com/tohsakrat/Ce-Mei-Killer/assets/45536831/76a32326-ab36-43b4-b4bb-794925350cfb)
 
-10. 进入项目文件![Ce-Mei-Killer.js](https://github.com/tohsakrat/Ce-Mei-Killer/blob/main/Ce-Mei-Killer.js)，复制全部代码，粘贴到控制台中，回车。
+10. 进入项目文件[Ce-Mei-Killer.js](https://github.com/tohsakrat/Ce-Mei-Killer/blob/main/Ce-Mei-Killer.js)，复制全部代码，粘贴到控制台中，回车。
    单独输入这段，并且把目标uid替换成你要拉黑的厕所的uid。
     ```javascript
     mainBlockAll(2303645815)// 替换为目标用户ID，一键拉黑
     ```
    回车。
+   
+>  tips
+>  遇到了奇奇怪怪的问题，有用户表示找不到光标没法粘贴，注意看光标在">"符号右边那条狭窄细长的区域，用鼠标多点几下，没有光标出来就是没点对地方
+>  ![image](https://github.com/tohsakrat/Ce-Mei-Killer/assets/45536831/856e58ce-8500-4429-8d0f-ed0fdae44ea4)
+>  有用户遇到了不能粘贴
+> ![35@2UN~KJR%@1 ZF@GF(Y6X](https://github.com/tohsakrat/Ce-Mei-Killer/assets/45536831/3cfe4e2a-d5ee-4ae7-8fe6-ed71d1e19948)
+> 参考[这篇文章](https://blog.csdn.net/KimBing/article/details/134938756)，在输入框手打allow pasting，然后回车，接下来就可以粘贴了
+> 
+
+
 
 ![image](https://github.com/tohsakrat/Ce-Mei-Killer/assets/45536831/530539e5-4a29-4372-8538-10ac39b4ff0d)
 
@@ -85,7 +95,7 @@ window.allDogs=[...]
 //[...]为你刚刚复制的数组
 ```
 
-再次在![Ce-Mei-Killer.js](https://github.com/tohsakrat/Ce-Mei-Killer/blob/main/Ce-Mei-Killer.js)，复制全部代码，粘贴到控制台中回车
+再次在[Ce-Mei-Killer.js](https://github.com/tohsakrat/Ce-Mei-Killer/blob/main/Ce-Mei-Killer.js)，复制全部代码，粘贴到控制台中回车
 
 然后单独输入下面这段，把12345换成刚刚最后一次报错前正在处理的uid。
 ```javascript
