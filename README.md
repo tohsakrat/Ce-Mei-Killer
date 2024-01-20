@@ -20,43 +20,69 @@
 
 ### 使用方法
 1. 登录PC版微博。如果已经和厕所双拉黑，可能获取不到粉丝列表，这时候需要采用小号获取uid列表，再由大号进行批量拉黑。会代码这很简单，不会也没关系，你奶奶都能看懂的拉黑教程会在稍后推出。
+   
 ![image](https://github.com/tohsakrat/Ce-Mei-Killer/assets/45536831/d3ed3196-8be4-4694-80f1-418139485bdd)
-3. 右上角账号设置 - 屏蔽设置
+
+4. 右上角账号设置 - 屏蔽设置
+   
 ![image](https://github.com/tohsakrat/Ce-Mei-Killer/assets/45536831/10cb913f-24f8-419b-ac95-258838417408)
-4. 点击键盘上的f12，调出开发者工具，右上角“网络”选项卡
+
+6. 点击键盘上的f12，调出开发者工具，右上角“网络”选项卡
+
 ![image](https://github.com/tohsakrat/Ce-Mei-Killer/assets/45536831/faadea4f-d5ff-4cc9-885e-aa8b17fe887e)
-5. 点击“解除屏蔽”先放厕所出来透透气。别担心，待会关回去。解除屏蔽同时观察右侧网络面板。
+
+7. 点击“解除屏蔽”先放厕所出来透透气。别担心，待会关回去。解除屏蔽同时观察右侧网络面板。
+
 ![image](https://github.com/tohsakrat/Ce-Mei-Killer/assets/45536831/3c927728-74f8-4bad-b1c1-d4de20108609)
-6. 在上一步网络面板增加的请求中，找到deleteFilteredUser这个请求，找到“响应”选项卡，寻找其中uid=xxx的字样，把uid=xxx后面那串数字复制下来
+
+8. 在上一步网络面板增加的请求中，找到deleteFilteredUser这个请求，找到“响应”选项卡，寻找其中uid=xxx的字样，把uid=xxx后面那串数字复制下来
+
 ![image](https://github.com/tohsakrat/Ce-Mei-Killer/assets/45536831/ec1803fe-a998-4e32-892b-c097e12e9521)
-7. 从“网络”选项卡切换到“控制台”选项卡
+
+9. 从“网络”选项卡切换到“控制台”选项卡
+
 ![image](https://github.com/tohsakrat/Ce-Mei-Killer/assets/45536831/76a32326-ab36-43b4-b4bb-794925350cfb)
-8. 进入项目文件![Ce-Mei-Killer.js](https://github.com/tohsakrat/Ce-Mei-Killer/blob/main/Ce-Mei-Killer.js)，复制全部代码，粘贴到控制台中，回车。
+
+10. 进入项目文件![Ce-Mei-Killer.js](https://github.com/tohsakrat/Ce-Mei-Killer/blob/main/Ce-Mei-Killer.js)，复制全部代码，粘贴到控制台中，回车。
    单独输入这段，并且把目标uid替换成你要拉黑的厕所的uid。
     ```javascript
     mainBlockAll(2303645815)// 替换为目标用户ID，一键拉黑
     ```
    回车。
+
 ![image](https://github.com/tohsakrat/Ce-Mei-Killer/assets/45536831/530539e5-4a29-4372-8538-10ac39b4ff0d)
+
 这时候代码就开始跑起来了，效果如下：
 这是在获取粉丝列表
+
 ![image](https://github.com/tohsakrat/Ce-Mei-Killer/assets/45536831/5c99122b-c321-4998-98f8-c60d4ee2823d)
+
 获取完成后，会把粉丝列表打印在控制台中。以防万一，可以右键保存，粘贴在本地记事本中。这样下次进入页面就不用重新获取了。
+
 ![image](https://github.com/tohsakrat/Ce-Mei-Killer/assets/45536831/f3f78519-fdb9-4ca2-b7dd-e8b0fe7a561d)
+
 ![image](https://github.com/tohsakrat/Ce-Mei-Killer/assets/45536831/81a6eeb2-2437-4841-8ab5-07fb9e2ae6e4)
+
 这是开始拉黑了
+
 ![image](https://github.com/tohsakrat/Ce-Mei-Killer/assets/45536831/a070060c-2958-4fef-b1dd-c35ec2716b5f)
 
-10. 喝杯茶，静待拉黑完成，如果遇到请求太频繁被大眼制裁（下图）不要慌张
+11. 喝杯茶，静待拉黑完成，如果遇到请求太频繁被大眼制裁（下图）不要慌张
+
  ![image](https://github.com/tohsakrat/Ce-Mei-Killer/assets/45536831/74b2af1f-fd25-4814-a330-a9a980832d7b)
-11. 滚动控制台，回到一开始的提示，复制完整的dogs数组，粘贴到本地的记事本
+
+12. 滚动控制台，回到一开始的提示，复制完整的dogs数组，粘贴到本地的记事本
+
 ![image](https://github.com/tohsakrat/Ce-Mei-Killer/assets/45536831/81a6eeb2-2437-4841-8ab5-07fb9e2ae6e4)
-12. 刷新页面后，在控制台输入
+
+13. 刷新页面后，在控制台输入
 ```javascript
 window.alldogs=[...]
 //[...]为你刚刚复制的数组
 ```
+
 再次在![Ce-Mei-Killer.js](https://github.com/tohsakrat/Ce-Mei-Killer/blob/main/Ce-Mei-Killer.js)，复制全部代码，粘贴到控制台中回车
+
 然后单独输入下面这段，把12345换成刚刚最后一次报错前正在处理的uid。
 ```javascript
  //mainResume(12345)//从上一次失败处开始拉黑，用于请求太频繁被大眼制裁的情况 
