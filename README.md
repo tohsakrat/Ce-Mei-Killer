@@ -24,15 +24,15 @@
 
 1. 登录PC版微博。如果已经和厕所双拉黑，可能获取不到粉丝列表，这时候需要采用小号获取uid列表，再由大号进行批量拉黑。会代码这很简单，不会也没关系，你奶奶都能看懂的拉黑教程会在稍后推出。
 
-![298266898-d3ed3196-8be4-4694-80f1-418139485bdd.png](https://cdn.nlark.com/yuque/0/2024/png/384567/1705744011138-48fd5ccc-a1f9-4e67-900c-1a05de6635c6.png#averageHue=%23696d5f&clientId=u2483ef78-4f36-4&from=drop&id=u7a8b6aa0&originHeight=952&originWidth=1791&originalType=binary&ratio=1&rotation=0&showTitle=false&size=1762091&status=done&style=none&taskId=u595bb0c2-5720-4748-b46c-470f4dfa7ea&title=)
+![输入图片说明](img1image.png)
 
 2. 右上角账号设置 - 屏蔽设置
 
-![](https://cdn.nlark.com/yuque/0/2024/png/384567/1705743624760-fdc4f887-8557-45d2-b8bf-c4b4891a5fc8.png#averageHue=%2322201e&clientId=uf36298e6-08ba-4&from=paste&id=uf6b03696&originHeight=695&originWidth=354&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=uf9c5d5c5-87c2-451b-b445-aa07ad6a8c3&title=)
+![输入图片说明](imgimage.png)
 
 3. 点击键盘上的f12，调出开发者工具，右上角“网络”选项卡
 
-![](https://cdn.nlark.com/yuque/0/2024/png/384567/1705744064210-df835384-96d5-4d01-92ad-d40e34bbd096.png#averageHue=%23c0a252&clientId=u2483ef78-4f36-4&from=paste&id=u111615f8&originHeight=845&originWidth=635&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u23352cfd-992a-411c-bb21-7df96842d05&title=)
+![输入图片说明](img3image.png)
 
 > tips
 有些电脑f12是系统自带功能键，需要按住键盘左下角的“fn”键，再按“F12”
@@ -41,29 +41,39 @@
 
 4. 点击“解除屏蔽”先放厕所出来透透气。别担心，待会关回去。解除屏蔽同时观察右侧网络面板。
 
-![](https://cdn.nlark.com/yuque/0/2024/png/384567/1705743638063-f6648578-65e7-463d-b5ec-cdd702ec0fa3.png#averageHue=%23242323&clientId=uf36298e6-08ba-4&from=paste&id=ub567fa1d&originHeight=509&originWidth=1114&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u650a0308-3397-4ff4-a195-e880656d5c6&title=)
-在你鼠标按下的同时，右边会多出来几行
-![](https://cdn.nlark.com/yuque/0/2024/png/384567/1705743644883-53bcb458-4bad-43ba-b07c-f42a47b2a5b6.png#averageHue=%23ddd52c&clientId=uf36298e6-08ba-4&from=paste&id=u78c62712&originHeight=741&originWidth=698&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=ud46a7957-ecf4-4462-a41e-ff04ee54e2e&title=)
+![输入图片说明](img4image.png)
 
-5. 在上一步网络面板增加的请求中，找到deleteFilteredUser这个请求，鼠标点击，找到“响应”选项卡，寻找其中uid=xxx的字样，把uid=xxx后面那串数字复制下来![](https://cdn.nlark.com/yuque/0/2024/png/384567/1705744492565-4c7c965a-d5c4-4a26-9286-14657afc8670.png#averageHue=%2331302f&clientId=u6bc3a7ca-6e9d-4&from=paste&id=uf7df274e&originHeight=712&originWidth=926&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=ubd79236b-2c4f-4f76-bc65-4ac25643dbf&title=)
+
+在你鼠标按下的同时，右边会多出来几行
+
+![输入图片说明](img5image.png)
+
+5. 在上一步网络面板增加的请求中，找到deleteFilteredUser这个请求，鼠标点击，找到“响应”选项卡，寻找其中uid=xxx的字样，把uid=xxx后面那串数字复制下来
+
+![输入图片说明](img6image.png)
+
+
+
 
 6. 从“网络”选项卡切换到“控制台”选项卡
 
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/384567/1705743827584-a218573c-a869-4543-8d77-01e3b722404b.png#averageHue=%234d3b37&clientId=ufda4a24f-a188-4&from=paste&height=667&id=ua3c605de&originHeight=667&originWidth=814&originalType=binary&ratio=1&rotation=0&showTitle=false&size=351909&status=done&style=none&taskId=u1ff03e39-a1ab-458d-9a1b-4b0c31feb08&title=&width=814)
+![输入图片说明](img7image.png)
 
 7. 进入项目文件[Ce-Mei-Killer.js](https://github.com/tohsakrat/Ce-Mei-Killer/blob/main/Ce-Mei-Killer.js)，复制全部代码，粘贴到控制台中，直接**回车**。
+
 8. 然后单独输入下面这行，并且把目标uid替换成你要拉黑的厕所的uid。  **回车执行**
+
 ```javascript
 mainBlockAll(2303645815)// 把2303645815替换为目标用户ID，一键拉黑
 ```
  
 > tips
 遇到了奇奇怪怪的问题，有用户表示找不到光标没法粘贴，注意看光标在">"符号右边那条狭窄细长的区域，用鼠标多点几下，没有光标出来就是没点对地方
->  ![image.png](https://cdn.nlark.com/yuque/0/2024/png/384567/1705743851816-971e811b-6726-489f-bc41-899d0c5e0255.png#averageHue=%23322d2c&clientId=ufda4a24f-a188-4&from=paste&height=185&id=u70343e29&originHeight=185&originWidth=678&originalType=binary&ratio=1&rotation=0&showTitle=false&size=23365&status=done&style=none&taskId=ub44309cb-7e4f-4753-b61a-598a864e752&title=&width=678)
+>  ![输入图片说明](img8image.png)
 > 
 > 有用户遇到了不能粘贴
 > 
-> ![](https://cdn.nlark.com/yuque/0/2024/png/384567/1705743908471-1b5fe937-7edb-43fe-8581-7b55f523012b.png#averageHue=%23fdfbf5&clientId=ufda4a24f-a188-4&from=paste&id=u8cd9b59d&originHeight=108&originWidth=1731&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u9b7d40c8-ffda-4693-9b8c-e6b5cc7f885&title=)
+> ![输入图片说明](img9image.png)
 > 
 > 参考[这篇文章](https://blog.csdn.net/KimBing/article/details/134938756)，在输入框手打allow pasting，然后回车，接下来就可以粘贴了
 
@@ -72,28 +82,53 @@ mainBlockAll(2303645815)// 把2303645815替换为目标用户ID，一键拉黑
 这时候代码就开始跑起来了，效果如下：
 这是在获取粉丝列表
 
-![](https://cdn.nlark.com/yuque/0/2024/png/384567/1705744116238-c571df03-a85e-4c66-8df0-59037a014d23.png#averageHue=%232d2c2b&clientId=u2483ef78-4f36-4&from=paste&id=u905bd76e&originHeight=715&originWidth=415&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=uce06dfc0-f88e-4e25-8b1b-3557170b9c9&title=)
+![输入图片说明](img10image.png)
+
+
+
 获取完成后，会把粉丝列表打印在控制台中。以防万一，可以右键保存，粘贴在本地记事本中。这样下次进入页面就不用重新获取了。
-![](https://cdn.nlark.com/yuque/0/2024/png/384567/1705743939002-9579d913-55eb-4e8f-9ca6-afee95d16f6f.png#averageHue=%23312f2c&clientId=ufda4a24f-a188-4&from=paste&id=ue1d60d56&originHeight=604&originWidth=440&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=ubca7ca4d-6c87-4b38-be07-4b47b1f8ab5&title=)
-![](https://cdn.nlark.com/yuque/0/2024/png/384567/1705743943841-3a842221-7233-4d03-ab74-a249c23d9d67.png#averageHue=%23675c3b&clientId=ufda4a24f-a188-4&from=paste&id=u50c25f83&originHeight=365&originWidth=569&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u9e5ca736-aa52-476b-b5dd-034f0149f74&title=)
+
+![输入图片说明](img11image.png)
+
+![输入图片说明](img12image.png)
+
+
 这是开始拉黑了
-![](https://cdn.nlark.com/yuque/0/2024/png/384567/1705743950084-ba129a82-0975-43bb-9aed-e229e7e42ac5.png#averageHue=%23302f2e&clientId=ufda4a24f-a188-4&from=paste&id=u9221fc5e&originHeight=496&originWidth=338&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u9c599933-f4ec-40c0-bd08-2c461bd3583&title=)
+
+![输入图片说明](img13image.png)
+
 
 12. 喝杯茶，静待拉黑完成，如果遇到请求太频繁被大眼制裁（下图）不要慌张
 
-![2P{DT)LE__6G7(C1TB@D50H.png](https://cdn.nlark.com/yuque/0/2024/png/384567/1705744541659-468bcca7-128f-4981-a468-8b98e8fc529a.png#averageHue=%23473634&clientId=udb8da631-601a-4&from=paste&height=240&id=uf7021060&originHeight=240&originWidth=590&originalType=binary&ratio=1&rotation=0&showTitle=false&size=25524&status=done&style=none&taskId=u4a783498-da29-401b-a25f-4f6f951ac14&title=&width=590)
+![输入图片说明](img14image.png)
 
-13. 滚动控制台，回到一开始的提示，复制完整的dogs数组，粘贴到本地的记事本
+13.在控制台输入
 
-![](https://cdn.nlark.com/yuque/0/2024/png/384567/1705743973576-5c0c591f-1baf-4faa-bf9f-1ccb2e8df014.png#averageHue=%23675c3b&clientId=ufda4a24f-a188-4&from=paste&id=u71ab6909&originHeight=365&originWidth=569&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=uea581fe8-f94d-4cc5-a16a-7f2ce1f9a30&title=)
+首先记录出问题前最后一个账号的uid
+![输入图片说明](img20image.png)
+
+然后在控制台输入下面这行回车
+```javascript
+window.allDogs
+```
+或者滚动控制台，回到一开始的提示
+
+这两种方法都可以看到形如下图的东西，这就是你要拉黑的账号列表数组。
+右键复制完整的dogs数组，粘贴到本地的记事本之类的地方保存。
+
+![输入图片说明](img15image.png)
 
 14. 刷新页面后，在控制台输入
+
+
+
 ```javascript
 window.allDogs=[...]
 //[...]为你刷新前复制的厕所粉丝数组，替换一下
 ```
 再次在[Ce-Mei-Killer.js](https://github.com/tohsakrat/Ce-Mei-Killer/blob/main/Ce-Mei-Killer.js)，复制全部代码，粘贴到控制台中**回车**
 然后单独输入下面这行，把12345换成刚刚最后一次报错前正在处理的uid，**回车**。
+
 ```javascript
  mainResume(12345)//从上一次失败处开始拉黑，把12345换成刚刚最后一次报错前正在处理的uid。用于请求太频繁被大眼制裁的情况
 ```
@@ -219,7 +254,7 @@ async function mainBlockList(uids) {
       const userId = uids[index];
       console.log(`Blocking dog ${userId} at index ${index} total ${uids.length}`); // 输出当前userId和下标
       await blockDog(userId); // 执行拉黑操作
-      await delay(200); // 等待0.2秒
+      await delay(400); // 等待0.4秒
     }
 	
   } catch (error) {

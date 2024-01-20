@@ -116,7 +116,7 @@ async function mainBlockList(uids) {
       const userId = uids[index];
       console.log(`Blocking dog ${userId} at index ${index} total ${uids.length}`); // 输出当前userId和下标
       await blockDog(userId); // 执行拉黑操作
-      await delay(200); // 等待0.2秒
+      await delay(400); // 等待0.4秒
     }
 	
   } catch (error) {
