@@ -77,7 +77,7 @@
 
 13. 刷新页面后，在控制台输入
 ```javascript
-window.alldogs=[...]
+window.allDogs=[...]
 //[...]为你刚刚复制的数组
 ```
 
