@@ -50,7 +50,7 @@
 10. 进入项目文件[Ce-Mei-Killer.js](https://github.com/tohsakrat/Ce-Mei-Killer/blob/main/Ce-Mei-Killer.js)，复制全部代码，粘贴到控制台中，回车。
    单独输入这段，并且把目标uid替换成你要拉黑的厕所的uid。
     ```javascript
-    mainBlockAll(2303645815)// 替换为目标用户ID，一键拉黑
+    mainBlockAll(2303645815)// 把2303645815替换为目标用户ID，一键拉黑
     ```
    回车。
    
@@ -92,14 +92,14 @@
 13. 刷新页面后，在控制台输入
 ```javascript
 window.allDogs=[...]
-//[...]为你刚刚复制的数组
+//[...]为你刷新前复制的厕所粉丝数组，替换一下
 ```
 
 再次在[Ce-Mei-Killer.js](https://github.com/tohsakrat/Ce-Mei-Killer/blob/main/Ce-Mei-Killer.js)，复制全部代码，粘贴到控制台中回车
 
 然后单独输入下面这段，把12345换成刚刚最后一次报错前正在处理的uid。
 ```javascript
- //mainResume(12345)//从上一次失败处开始拉黑，用于请求太频繁被大眼制裁的情况 
+ //mainResume(12345)//从上一次失败处开始拉黑，把12345换成刚刚最后一次报错前正在处理的uid。用于请求太频繁被大眼制裁的情况 
 ```
 
 ### 贡献和支持
