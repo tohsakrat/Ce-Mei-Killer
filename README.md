@@ -194,7 +194,9 @@ async function fetchAllFans(uid) {
     allFans = allFans.concat(fans);
   }
   allFans = allFans.map(e=>e.id)
-  console.log('All fans fetched. Total dogs:', allFans.length);
+  
+  allFans.push(uid);
+  console.log('All dogs fetched. Total dogs:', allFans.length);
   console.log(allFans)
   return allFans;
 }
