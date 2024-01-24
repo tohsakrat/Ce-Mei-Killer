@@ -22,6 +22,8 @@
 
 ### 使用方法
 
+
+#### 常规使用
 1. 登录PC版微博。如果已经和厕所双拉黑，可能获取不到粉丝列表，这时候需要采用小号获取uid列表，再由大号进行批量拉黑。会代码这很简单，不会也没关系，你奶奶都能看懂的拉黑教程会在稍后推出。
 
 ![输入图片说明](img1image.png)
@@ -69,7 +71,6 @@ mainBlockAll(2303645815)// 把2303645815替换为目标用户ID，一键拉黑
  
 > tips
 遇到了奇奇怪怪的问题，有用户表示找不到光标没法粘贴，注意看光标在">"符号右边那条狭窄细长的区域，用鼠标多点几下，没有光标出来就是没点对地方
-> 
 >  ![输入图片说明](img8image.png)
 > 
 > 有用户遇到了不能粘贴
@@ -103,8 +104,9 @@ mainBlockAll(2303645815)// 把2303645815替换为目标用户ID，一键拉黑
 
 ![输入图片说明](img14image.png)
 
-13.首先记录出问题前最后一个账号的uid
+13.在控制台输入
 
+首先记录出问题前最后一个账号的uid
 ![输入图片说明](img20image.png)
 
 然后在控制台输入下面这行回车
@@ -132,6 +134,28 @@ window.allDogs=[...]
 ```javascript
  mainResume(12345)//从上一次失败处开始拉黑，把12345换成刚刚最后一次报错前正在处理的uid。用于请求太频繁被大眼制裁的情况
 ```
+
+#### 拉黑红v大厕所前5000粉
+> （原来世界上还存在专业运营有认证的厕所，可以藏起5000以后的列表。po主只被几百个人的饭圈厕所骚扰已经不堪其扰，也是长了很多见识）
+1. 请确保您已经尝试过上一节的方式，并且发现无法获取到完整的厕所粉丝列表（一般只能获取到第一页）再尝试。
+2. 获取uid方式同上一节
+3. 打开网页https://m.weibo.cn/，这是微博h5版，登录
+4. 同第一节，进入项目文件[Ce-Mei-Killer.js](https://github.com/tohsakrat/Ce-Mei-Killer/blob/main/Ce-Mei-Killer.js)，复制全部代码，粘贴到控制台中，直接**回车**。
+
+5. 然后单独输入下面这行，并且把目标uid替换成你要拉黑的厕所的uid。  **回车执行**
+
+```javascript
+///mainFetchFans5000(2303645815) // 获取红v厕所前5000粉丝
+```
+6. 获取完毕后，同上一节第十三步，复制红v厕所的粉丝数组，粘贴到记事本。
+7. 回到https://weibo.com,也就是微博pc版。
+单独输入下面这行，并且把刚刚获取的数组粘贴到括号里，替换掉括号内内容， **回车执行**
+
+```javascript
+// mainBlockList([12345, 67890]); // 替换为需要拉黑的用户ID数组，只拉黑指定用户
+```
+
+8. 其他操作同上一节，有问题随时在issue联系我。
 
 ### Ce-Mei-Killer.js代码正文
 由于国内访问github可能存在一定问题，为方便用户使用，这里将代码正文也附在说明中。
@@ -178,6 +202,20 @@ async function fetchPage(uid, page) {
   }
 }
 
+// 获取某一页的粉丝, 前5000接口
+async function fetchPage5000(uid, page) {
+	const since = page*20;
+	const url = `https://m.weibo.cn/api/container/getIndex?containerid=231051_-_fans_-_${uid}&since_id=${since}`;
+	const data = await makeRequest(url);
+	if (data && data?.data?.cards && data.data.cards.length > 0) {
+    console.log(`Fetched page ${page}.`);	
+    return data.data.cards.map(e=>e.card_group).flat().filter(e=>e.buttons).map(e=>e.buttons).flat().map(e=>e.params.uid)
+  } else {
+    console.log(`Page ${page} is empty, possibly blocked dogs.`);
+    return [];
+  }
+}
+
 // 获取所有粉丝的封装函数
 async function fetchAllFans(uid) {
   const pageSize = 20;
@@ -189,14 +227,37 @@ async function fetchAllFans(uid) {
   }
 
   let allFans = [];
-  for (let page = 1; page <= totalPages; page++) {
+  for (let page = 0; page <= totalPages; page++) {
     const fans = await fetchPage(uid, page);
     allFans = allFans.concat(fans);
+	delay(500)//避免渣浪制裁
   }
   allFans = allFans.map(e=>e.id)
   
   allFans.push(uid);
   console.log('All dogs fetched. Total dogs:', allFans.length);
+  console.log(allFans)
+  return allFans;
+}
+
+
+async function fetch5000Fans(uid) {
+  const pageSize = 20;
+  const totalPages =250;
+  console.log(`------- Fetching first 5000 dogs, perhaps 250 pages  -------`);
+  if (totalPages === 0) {
+    console.log('No pages to fetch or error occurred.');
+    return [];
+  }
+
+  let allFans = [];
+  for (let page = 0; page <= totalPages; page++) {
+    const fans = await  fetchPage5000(uid, page);
+    allFans = allFans.concat(fans);
+	delay(200)//避免渣浪制裁
+  } 
+  allFans.push(uid);
+  console.log('first 5000 dogs fetched. Total dogs:', allFans.length);
   console.log(allFans)
   return allFans;
 }
@@ -225,6 +286,11 @@ async function blockAllDogs(uid) {
    mainBlockList(window.allDogs); 
 }
 
+async function block5000Dogs(uid) {
+  window.allDogs = await fetch5000Fans(uid);
+   mainBlockList(window.allDogs); 
+}
+
 // 主函数 - 一键拉黑版本
 async function mainBlockAll(uid) {
   try {
@@ -234,10 +300,35 @@ async function mainBlockAll(uid) {
   }
 }
 
+
+// 主函数 - 拉黑前5000版本
+async function mainBlock5000(uid) {
+  try {
+    await block5000Dogs(uid);
+  } catch (error) {
+    console.error('An error occurred in mainBlockAll:', error);
+  }
+}
+
+
+
+
+
 // 主函数 - 只获取厕所账号粉丝版本
 async function mainFetchFans(uid) {
   try {
     await fetchAllFans(uid);
+  } catch (error) {
+    console.error('An error occurred in mainFetchFans:', error);
+  }
+}
+
+
+
+// 主函数 - 获取红v厕所前5000粉丝
+async function mainFetchFans5000(uid) {
+  try {
+    await fetch5000Fans(uid);
   } catch (error) {
     console.error('An error occurred in mainFetchFans:', error);
   }
@@ -285,7 +376,10 @@ async function mainResume(uid) {
 
 
 // 根据需要调用不同的主函数
+
 //mainBlockAll(2303645815); // 替换为目标用户ID，一键拉黑
+//mainBlock5000(2303645815); // 替换为目标用户ID，获取红v厕所前5000粉丝，一键拉黑，目前还有问题（跨域）
+///mainFetchFans5000(2303645815) // 获取红v厕所前5000粉丝
 // mainFetchFans(2303645815);//只获取厕所粉丝
 // mainFetchFans(2303645815); // 替换为目标用户ID，只获取厕所账号粉丝
 // mainBlockList([12345, 67890]); // 替换为需要拉黑的用户ID数组，只拉黑指定用户
