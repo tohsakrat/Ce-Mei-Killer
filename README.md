@@ -139,7 +139,7 @@ window.allDogs=[...]
 > （原来世界上还存在专业运营有认证的厕所，可以藏起5000以后的列表。po主只被几百个人的饭圈厕所骚扰已经不堪其扰，也是长了很多见识）
 1. 请确保您已经尝试过上一节的方式，并且发现无法获取到完整的厕所粉丝列表（一般只能获取到第一页）再尝试。
 2. 获取uid方式同上一节
-3. 打开网页https://m.weibo.cn/，这是微博h5版，登录
+3. 打开网页[https://m.weibo.cn/](https://m.weibo.cn/)，这是微博h5版，登录
 4. 同第一节，进入项目文件[Ce-Mei-Killer.js](https://github.com/tohsakrat/Ce-Mei-Killer/blob/main/Ce-Mei-Killer.js)，复制全部代码，粘贴到控制台中，直接**回车**。
 
 5. 然后单独输入下面这行，并且把目标uid替换成你要拉黑的厕所的uid。  **回车执行**
